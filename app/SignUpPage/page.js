@@ -1,5 +1,7 @@
 import React from "react";
-
+import Image from "next/image";
+import GoogleLogo from '../logo/GoogleLogo.png';
+import GitHubLogo from '../logo/GitHubLogo.png';
 export default function SignUp() {
   return (
     <div
@@ -58,6 +60,22 @@ export default function SignUp() {
             className="w-full py-2 px-4 bg-[#DC8686] text-white rounded-md font-bold hover:bg-[#bf7676]"
           >
             Sign Up
+          </button>
+          <button
+            className="w-full py-2 px-4 bg-blue-600 text-white rounded-md font-bold hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+          >
+            <span className="mr-2">
+              <Image src={GoogleLogo} alt="Google logo" width={30} height={30} />
+            </span>
+            Continue with Google
+          </button>
+          <button
+            className="w-full py-2 px-4 bg-gray-600 text-white rounded-md font-bold hover:bg-gray-700 transition duration-300 flex items-center justify-center"
+          >
+            <span className="mr-2">
+              <Image src={GitHubLogo} alt="GitHub Logo" width={30} height={30} />
+            </span>
+            Continue with GitHub
           </button>
         </form>
       </div>

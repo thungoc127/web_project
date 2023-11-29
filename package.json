@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "encoding": "^0.1.13",
     "firebase": "^10.7.0",
     "my-package": "^0.0.0",
     "next": "14.0.3",
