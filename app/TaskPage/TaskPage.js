@@ -26,7 +26,7 @@ export default function TaskPage() {
           </ul>
         </aside>
 
-        {/* Main Content Area */}
+        {/* Main Content Area */} 
         <main className="w-3/4 p-4">
           {/* List Container */}
           <section className="mb-4">
