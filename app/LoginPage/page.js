@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useUserAuth } from "./_utils/auth-context";
+import { useUserAuth } from "../_utils/auth-context";
 import Link from 'next/link'
 import Image from 'next/image';
 import GoogleLogo from '../logo/GoogleLogo.png';
