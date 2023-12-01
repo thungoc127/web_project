@@ -1,9 +1,36 @@
+"use client";
+
 import React from "react";
+import { useUserAuth } from "../_utils/auth-context";
+import Link from 'next/link'
 import Image from 'next/image';
 import GoogleLogo from '../logo/GoogleLogo.png';
 import GitHubLogo from '../logo/GitHubLogo.png';
 
 export default function LoginPage() {
+  const { user, gitHubSignIn, gitHubSignOut } = useUserAuth();
+
+  // user is an object with the following properties:
+  // displayName, email, emailVerified, photoURL, uid, phoneNumber, providerData
+
+  async function handleSignIn() {
+    try {
+      await gitHubSignIn();
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleSignOut() {
+    try {
+      await gitHubSignOut();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  console.log(user);
   return (
     <div
       className="flex justify-center items-center min-h-screen"
@@ -51,6 +78,7 @@ export default function LoginPage() {
             Log In
           </button>
           <button
+          onClick={handleSignOut}
             className="w-full py-2 px-4 bg-blue-600 text-white rounded-md font-bold hover:bg-blue-700 transition duration-300 flex items-center justify-center"
           >
             <span className="mr-2">
@@ -59,6 +87,7 @@ export default function LoginPage() {
             Continue with Google
           </button>
           <button
+          onClick={handleSignIn}
             className="w-full py-2 px-4 bg-gray-600 text-white rounded-md font-bold hover:bg-gray-700 transition duration-300 flex items-center justify-center"
           >
             <span className="mr-2">

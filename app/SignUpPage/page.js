@@ -1,8 +1,54 @@
+"use client"
+
 import React from "react";
+import { useUserAuth } from "../_utils/auth-context";
 import Image from "next/image";
-import GoogleLogo from '../logo/GoogleLogo.png';
-import GitHubLogo from '../logo/GitHubLogo.png';
-export default function SignUp() {
+import { useState } from "react";
+import GoogleLogo from "../logo/GoogleLogo.png";
+import GitHubLogo from "../logo/GitHubLogo.png";
+import { addUser } from "../_services/logInServices";
+
+export default function SignUpPage() {
+  const { user, gitHubSignIn, gitHubSignOut } = useUserAuth();
+  const [fullName, setName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSignIn() {
+    try {
+      await gitHubSignIn();
+      console.log(user);
+    } catch (error) { 
+      console.log(error);
+    }
+  }
+
+  const handleSetFullName = (event) => {
+    setName(event.target.value);
+  };
+  const handleSetUsername = (event) => {
+    setUserName(event.target.value);
+  };
+  const handleSetPassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const newItem = {
+    "fullName": fullName,
+    "userName": userName,
+    "password": password
+  };
+
+  const handleSignUp=()=>{
+    if (user) {
+      addUser(newItem,user.uid)
+      console.log("addUser",user.uid);
+
+    }
+    else{      console.log("fail");
+  }
+  }
+
   return (
     <div
       className="flex justify-center items-center min-h-screen"
@@ -12,7 +58,7 @@ export default function SignUp() {
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Create New Account
         </h2>
-        <form className="space-y-6">
+        <form  onSubmit={handleSignUp} className="space-y-6">
           <div>
             <label
               htmlFor="full-name"
@@ -21,6 +67,8 @@ export default function SignUp() {
               Your Full Name
             </label>
             <input
+              value={fullName}
+              onChange={handleSetFullName}
               id="full-name"
               type="text"
               placeholder="Enter Your Name Here"
@@ -35,6 +83,8 @@ export default function SignUp() {
               Username
             </label>
             <input
+              value={userName}
+              onChange={handleSetUsername}
               id="username"
               type="text"
               placeholder="Enter Your Email Here"
@@ -49,9 +99,11 @@ export default function SignUp() {
               Password
             </label>
             <input
+              value={password}
+              onChange={handleSetPassword}
               id="password"
-              type="password"
-              placeholder="Enter Your Password Here"
+              type="password"  
+               placeholder="Enter Your Password Here"
               className="w-full p-2 border border-[#DC8686] rounded-md text-gray-600"
             />
           </div>
@@ -61,23 +113,34 @@ export default function SignUp() {
           >
             Sign Up
           </button>
-          <button
-            className="w-full py-2 px-4 bg-blue-600 text-white rounded-md font-bold hover:bg-blue-700 transition duration-300 flex items-center justify-center"
-          >
+          
+        </form>
+        <button 
+        onClick={handleSignUp}
+        className="mt-2 mb-2 w-full py-2 px-4 bg-blue-600 text-white rounded-md font-bold hover:bg-blue-700 transition duration-300 flex items-center justify-center">
             <span className="mr-2">
-              <Image src={GoogleLogo} alt="Google logo" width={30} height={30} />
+              <Image
+                src={GoogleLogo}
+                alt="Google logo"
+                width={30}
+                height={30}
+              />
             </span>
             Continue with Google
           </button>
-          <button
-            className="w-full py-2 px-4 bg-gray-600 text-white rounded-md font-bold hover:bg-gray-700 transition duration-300 flex items-center justify-center"
-          >
+          <button 
+          onClick={handleSignIn}
+          className="w-full py-2 px-4 bg-gray-600 text-white rounded-md font-bold hover:bg-gray-700 transition duration-300 flex items-center justify-center">
             <span className="mr-2">
-              <Image src={GitHubLogo} alt="GitHub Logo" width={30} height={30} />
+              <Image
+                src={GitHubLogo}
+                alt="GitHub Logo"
+                width={30}
+                height={30}
+              />
             </span>
             Continue with GitHub
           </button>
-        </form>
       </div>
     </div>
   );
