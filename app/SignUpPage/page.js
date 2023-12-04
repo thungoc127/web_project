@@ -1,11 +1,7 @@
 "use client"
-
 import React from "react";
 import { useUserAuth } from "../_utils/auth-context";
-import Image from "next/image";
 import { useState } from "react";
-import GoogleLogo from "../logo/GoogleLogo.png";
-import GitHubLogo from "../logo/GitHubLogo.png";
 import { addUser } from "../_services/logInServices";
 
 export default function SignUpPage() {
@@ -107,40 +103,16 @@ export default function SignUpPage() {
               className="w-full p-2 border border-[#DC8686] rounded-md text-gray-600"
             />
           </div>
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-[#DC8686] text-white rounded-md font-bold hover:bg-[#bf7676]"
+      
+          
+        </form>
+        <button
+            onClick={handleSignUp}
+            className="mt-2  w-full py-2 px-4 bg-[#DC8686] text-white rounded-md font-bold hover:bg-[#bf7676]"
           >
             Sign Up
           </button>
-          
-        </form>
-        <button 
-        onClick={handleSignUp}
-        className="mt-2 mb-2 w-full py-2 px-4 bg-blue-600 text-white rounded-md font-bold hover:bg-blue-700 transition duration-300 flex items-center justify-center">
-            <span className="mr-2">
-              <Image
-                src={GoogleLogo}
-                alt="Google logo"
-                width={30}
-                height={30}
-              />
-            </span>
-            Continue with Google
-          </button>
-          <button 
-          onClick={handleSignIn}
-          className="w-full py-2 px-4 bg-gray-600 text-white rounded-md font-bold hover:bg-gray-700 transition duration-300 flex items-center justify-center">
-            <span className="mr-2">
-              <Image
-                src={GitHubLogo}
-                alt="GitHub Logo"
-                width={30}
-                height={30}
-              />
-            </span>
-            Continue with GitHub
-          </button>
+       
       </div>
     </div>
   );
