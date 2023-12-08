@@ -5,4 +5,5 @@ const SubTask = ({ content }) => (
       <p className="text-sm">{content}</p>
     </div>
   );
-  export default SubTask;
+
+export default SubTask;
