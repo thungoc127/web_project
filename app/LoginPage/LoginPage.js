@@ -2,7 +2,9 @@
 
 import React from "react";
 import { useUserAuth } from "../_utils/auth-context";
+import Link from 'next/link'
 import Image from 'next/image';
+import GoogleLogo from '../logo/GoogleLogo.png';
 import GitHubLogo from '../logo/GitHubLogo.png';
 
 export default function LoginPage() {
@@ -75,7 +77,7 @@ export default function LoginPage() {
           >
             Log In
           </button>
-          {/* <button
+          <button
           onClick={handleSignOut}
             className="w-full py-2 px-4 bg-blue-600 text-white rounded-md font-bold hover:bg-blue-700 transition duration-300 flex items-center justify-center"
           >
@@ -83,7 +85,7 @@ export default function LoginPage() {
               <Image src={GoogleLogo} alt="Google logo" width={30} height={30} />
             </span>
             Continue with Google
-          </button> */}
+          </button>
           <button
           onClick={handleSignIn}
             className="w-full py-2 px-4 bg-gray-600 text-white rounded-md font-bold hover:bg-gray-700 transition duration-300 flex items-center justify-center"

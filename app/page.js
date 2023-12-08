@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from 'next/image';
+import LoginPage from "./LoginPage/page";
+
 
 export default function Home() {
   return (
@@ -24,7 +26,13 @@ export default function Home() {
           Sign Up
         </button>
       </Link>
+      <Link href="/TaskPage">
+      <button className="w-full py-2 px-4 bg-[#DC8686] text-white rounded-md text-lg font-bold hover:bg-[#bf7676] transition duration-300">
+          Task Page
+        </button>
+      </Link>
       </div>
     </main>
   );
 }
+
