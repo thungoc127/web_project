@@ -3,12 +3,16 @@ import React from "react";
 import { useUserAuth } from "../_utils/auth-context";
 import { useState } from "react";
 import { addUser } from "../_services/logInServices";
+import AlertDialog from "./AlertDialog";
+import Link from "next/link";
 
 export default function SignUpPage() {
   const { user, gitHubSignIn, gitHubSignOut } = useUserAuth();
   const [fullName, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [isErrorDialogOpen, setErrorDialogOpen] = useState(false);
 
   async function handleSignIn() {
     try {
@@ -39,17 +43,26 @@ export default function SignUpPage() {
     if (user) {
       addUser(newItem,user.uid)
       console.log("addUser",user.uid);
-
+      setDialogOpen(true)
     }
-    else{      console.log("fail");
+    else{      console.log("fail");}
   }
-  }
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
 
   return (
     <div
       className="flex justify-center items-center min-h-screen"
       style={{ backgroundColor: "#FFFFFF" }}
     >
+      <Link href="./LoginPage">
+      <button
+        className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
+      >
+        ← Back To Main Page
+      </button>
+      </Link>
       <div className="w-full max-w-sm">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Create New Account
@@ -114,6 +127,8 @@ export default function SignUpPage() {
           </button>
        
       </div>
+      <AlertDialog isOpen={isDialogOpen} onClose={handleCloseDialog} content={"Congratulation! You signed up successfully!"}/>
+
     </div>
   );
 }
