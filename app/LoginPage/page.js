@@ -3,7 +3,6 @@
 import React from "react";
 import { useUserAuth } from "../_utils/auth-context";
 import Image from 'next/image';
-import GoogleLogo from '../logo/GoogleLogo.png';
 import GitHubLogo from '../logo/GitHubLogo.png';
 
 export default function LoginPage() {
