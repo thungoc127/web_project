@@ -13,13 +13,15 @@ const AuthContext = createContext();
  
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  console.log('user ' + user)
  
   const gitHubSignIn = () => {
     const provider = new GithubAuthProvider();
     return signInWithPopup(auth, provider);
   };
  
-  const gitHubSignOut = () => {
+  const logout = () => {
     return signOut(auth);
   };
  
@@ -31,7 +33,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
  
   return (
-    <AuthContext.Provider value={{ user, gitHubSignIn, gitHubSignOut }}>
+    <AuthContext.Provider value={{ user, gitHubSignIn, logout }}>
       {children}
     </AuthContext.Provider>
   );

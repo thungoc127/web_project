@@ -3,20 +3,22 @@
 import React from "react";
 import { useUserAuth } from "../_utils/auth-context";
 import Image from 'next/image';
-import GoogleLogo from '../logo/GoogleLogo.png';
 import GitHubLogo from '../logo/GitHubLogo.png';
 import Link from "next/link";
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
-  const { user, gitHubSignIn, gitHubSignOut } = useUserAuth();
+  const router = useRouter()
+  const { user, gitHubSignIn, logout } = useUserAuth();
 
   // user is an object with the following properties:
   // displayName, email, emailVerified, photoURL, uid, phoneNumber, providerData
-
+  console.log(user)
   async function handleSignIn() {
     try {
       await gitHubSignIn();
       console.log(user);
+      router.replace('task')
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +32,6 @@ export default function LoginPage() {
     }
   }
 
-  console.log(user);
   return (
     <div
       className="flex justify-center items-center min-h-screen"

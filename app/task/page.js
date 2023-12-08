@@ -7,19 +7,20 @@ import { addTask } from "../_services/taskService";
 import { useUserAuth } from "../_utils/auth-context";
 import { addUser } from "../_services/logInServices";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation";
 
 function TaskPage() {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [isErrorDialogOpen, setErrorDialogOpen] = useState(false);
   const [taskLists, setTaskLists] = useState([]);
-  const { user } = useUserAuth();
+  const { user, logout } = useUserAuth();
 
   const task = {
-    "title": title,
-    "description": description
+    title: title,
+    description: description,
   };
 
   const handleTitleChange = (event) => {
@@ -31,18 +32,20 @@ function TaskPage() {
     setDescription(val);
   };
 
+  const handleLogout = async (event) => {
+    await logout();
+    router.replace("landing")
+  };
 
-  
   const newItem = {
-    "fullName": title,
-    "userName": description,
-    "password": description
+    fullName: title,
+    userName: description,
+    password: description,
   };
   const newTask = {
-    "title": title,
-    "description": description,
+    title: title,
+    description: description,
   };
-
 
   const handleAddNewTask = () => {
     if (title == "") {
@@ -58,8 +61,8 @@ function TaskPage() {
       setDialogOpen(true);
 
       if (user) {
-        addUser(newItem,user.uid)
-        addTask(newTask,user.uid)
+        addUser(newItem, user.uid);
+        addTask(newTask, user.uid);
         console.log("addTask", user.uid);
       } else {
         console.log("fail");
@@ -85,14 +88,13 @@ function TaskPage() {
         onClose={handleCloseErrorDialog}
         content={"Empty task title, please try again!"}
       />
-      <Link href="./LoginPage">
       <button
         className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
+        onClick={handleLogout}
       >
-        ← Back To Main Page
+        Logout
       </button>
-      </Link>
-      
+
       <header className="text-center p-4 bg-[#DC8686] text-white">
         <h1 className="text-4xl font-bold">Welcome to Simple Task</h1>
         <h2 className="text-2xl">Make your life easier</h2>
