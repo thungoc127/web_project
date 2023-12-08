@@ -66,7 +66,11 @@ function TaskPage() {
         onClose={handleCloseErrorDialog}
         content={"Empty task title, please try again!"}
       />
-
+      <button
+        className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
+      >
+        ← Back To Main Page
+      </button>
       <header className="text-center p-4 bg-[#DC8686] text-white">
         <h1 className="text-4xl font-bold">Welcome to Simple Task</h1>
         <h2 className="text-2xl">Make your life easier</h2>

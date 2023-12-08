@@ -50,6 +50,11 @@ export default function SignUpPage() {
       className="flex justify-center items-center min-h-screen"
       style={{ backgroundColor: "#FFFFFF" }}
     >
+      <button
+        className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
+      >
+        ← Back To Main Page
+      </button>
       <div className="w-full max-w-sm">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Create New Account
