@@ -3,7 +3,9 @@
 import React from "react";
 import { useUserAuth } from "../_utils/auth-context";
 import Image from 'next/image';
+import GoogleLogo from '../logo/GoogleLogo.png';
 import GitHubLogo from '../logo/GitHubLogo.png';
+import Link from "next/link";
 
 export default function LoginPage() {
   const { user, gitHubSignIn, gitHubSignOut } = useUserAuth();
@@ -34,6 +36,14 @@ export default function LoginPage() {
       className="flex justify-center items-center min-h-screen"
       style={{ backgroundColor: "#FFFFFF" }}
     >
+      <Link href="./LoginPage">
+      <button
+        className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
+      >
+        ← Back To Main Page
+      </button>
+      </Link>
+
       <div className="w-full max-w-sm">
         <h1
           className="text-3xl font-bold text-center mb-8"

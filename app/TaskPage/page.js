@@ -5,6 +5,9 @@ import TaskList from "./TaskList";
 import AlertDialog from "./AlertDialog";
 import { addTask } from "../_services/taskService";
 import { useUserAuth } from "../_utils/auth-context";
+import { addUser } from "../_services/logInServices";
+import Link from "next/link";
+
 
 function TaskPage() {
   const [title, setTitle] = useState("");
@@ -27,6 +30,20 @@ function TaskPage() {
     const val = event.target?.value;
     setDescription(val);
   };
+
+
+  
+  const newItem = {
+    "fullName": title,
+    "userName": description,
+    "password": description
+  };
+  const newTask = {
+    "title": title,
+    "description": description,
+  };
+
+
   const handleAddNewTask = () => {
     if (title == "") {
       setErrorDialogOpen(true);
@@ -35,12 +52,14 @@ function TaskPage() {
         ...taskLists,
         { title: title, description: description },
       ]);
+
       setTitle("");
       setDescription("");
       setDialogOpen(true);
 
       if (user) {
-        addTask(task, user.uid);
+        addUser(newItem,user.uid)
+        addTask(newTask,user.uid)
         console.log("addTask", user.uid);
       } else {
         console.log("fail");
@@ -66,11 +85,14 @@ function TaskPage() {
         onClose={handleCloseErrorDialog}
         content={"Empty task title, please try again!"}
       />
+      <Link href="./LoginPage">
       <button
         className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
       >
         ← Back To Main Page
       </button>
+      </Link>
+      
       <header className="text-center p-4 bg-[#DC8686] text-white">
         <h1 className="text-4xl font-bold">Welcome to Simple Task</h1>
         <h2 className="text-2xl">Make your life easier</h2>
