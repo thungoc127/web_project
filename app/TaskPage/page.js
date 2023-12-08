@@ -5,6 +5,8 @@ import TaskList from "./TaskList";
 import AlertDialog from "./AlertDialog";
 import { addTask } from "../_services/taskService";
 import { useUserAuth } from "../_utils/auth-context";
+import { addUser } from "../_services/logInServices";
+
 
 function TaskPage() {
   const [title, setTitle] = useState("");
@@ -27,6 +29,16 @@ function TaskPage() {
     const val = event.target?.value;
     setDescription(val);
   };
+
+
+  
+  const newItem = {
+    "fullName": title,
+    "userName": description,
+    "password": description
+  };
+
+
   const handleAddNewTask = () => {
     if (title == "") {
       setErrorDialogOpen(true);
@@ -35,6 +47,8 @@ function TaskPage() {
         ...taskLists,
         { title: title, description: description },
       ]);
+      addUser(newItem,user.uid)
+
       setTitle("");
       setDescription("");
       setDialogOpen(true);
