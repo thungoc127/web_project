@@ -2,23 +2,22 @@
 
 import React from "react";
 import { useUserAuth } from "../_utils/auth-context";
-import Image from 'next/image';
-import GitHubLogo from '../logo/GitHubLogo.png';
+import Image from "next/image";
+import GitHubLogo from "../logo/GitHubLogo.png";
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const router = useRouter()
+  const router = useRouter();
   const { user, gitHubSignIn, logout } = useUserAuth();
 
   // user is an object with the following properties:
   // displayName, email, emailVerified, photoURL, uid, phoneNumber, providerData
-  console.log(user)
   async function handleSignIn() {
     try {
       await gitHubSignIn();
       console.log(user);
-      router.replace('task')
+      router.replace("TaskPage");
     } catch (error) {
       console.log(error);
     }
@@ -38,11 +37,12 @@ export default function LoginPage() {
       style={{ backgroundColor: "#FFFFFF" }}
     >
       <Link href="./LoginPage">
-      <button
-        className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
-      >
-        ← Back To Main Page
-      </button>
+        <button
+          onClick={() => router.back()}
+          className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
+        >
+          ← Back To Main Page
+        </button>
       </Link>
 
       <div className="w-full max-w-sm">
@@ -81,9 +81,7 @@ export default function LoginPage() {
               placeholder="Enter your password"
             />
           </div>
-          <button
-            className="w-full py-2 px-4 bg-[#DC8686] text-white rounded-md font-bold hover:bg-[#bf7676] transition duration-300"
-          >
+          <button className="w-full py-2 px-4 bg-[#DC8686] text-white rounded-md font-bold hover:bg-[#bf7676] transition duration-300">
             Log In
           </button>
           {/* <button
@@ -96,11 +94,16 @@ export default function LoginPage() {
             Continue with Google
           </button> */}
           <button
-          onClick={handleSignIn}
+            onClick={handleSignIn}
             className="w-full py-2 px-4 bg-gray-600 text-white rounded-md font-bold hover:bg-gray-700 transition duration-300 flex items-center justify-center"
           >
             <span className="mr-2">
-              <Image src={GitHubLogo} alt="GitHub Logo" width={30} height={30} />
+              <Image
+                src={GitHubLogo}
+                alt="GitHub Logo"
+                width={30}
+                height={30}
+              />
             </span>
             Continue with GitHub
           </button>

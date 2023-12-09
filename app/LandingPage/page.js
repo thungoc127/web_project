@@ -10,7 +10,7 @@ export default function LandingPage() {
   const { user, gitHubSignIn, logout } = useUserAuth();
 
   if (user) {
-    return router.replace("task");
+    return router.replace("TaskPage");
   } else {
     return (
       <main
@@ -24,12 +24,12 @@ export default function LandingPage() {
           Manage your To Do tasks with SIMPLETASK
         </h1>
         <div className="flex flex-col space-y-6 w-full max-w-sm">
-          <Link href="/login">
+          <Link href="/LoginPage">
             <button className="w-full py-2 px-4 bg-[#DC8686] text-white rounded-md text-lg font-bold hover:bg-[#bf7676] transition duration-300">
               Log In
             </button>
           </Link>
-          <Link href="/signup">
+          <Link href="/SignUpPage">
             <button className="w-full py-2 px-4 bg-[#DC8686] text-white rounded-md text-lg font-bold hover:bg-[#bf7676] transition duration-300">
               Sign Up
             </button>

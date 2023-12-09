@@ -18,6 +18,14 @@ function TaskPage() {
   const [taskLists, setTaskLists] = useState([]);
   const { user, logout } = useUserAuth();
 
+  if (user == null) {
+    return (
+      <>
+        <p>Unauthorized</p>
+      </>
+    );
+  }
+
   const task = {
     title: title,
     description: description,
@@ -34,7 +42,7 @@ function TaskPage() {
 
   const handleLogout = async (event) => {
     await logout();
-    router.replace("landing")
+    router.replace("LandingPage");
   };
 
   const newItem = {

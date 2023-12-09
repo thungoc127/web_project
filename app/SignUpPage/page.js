@@ -1,12 +1,14 @@
-"use client"
+"use client";
 import React from "react";
 import { useUserAuth } from "../_utils/auth-context";
 import { useState } from "react";
 import { addUser } from "../_services/logInServices";
 import AlertDialog from "./AlertDialog";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
+  const router = useRouter();
   const { user, gitHubSignIn, gitHubSignOut } = useUserAuth();
   const [fullName, setName] = useState("");
   const [userName, setUserName] = useState("");
@@ -18,7 +20,7 @@ export default function SignUpPage() {
     try {
       await gitHubSignIn();
       console.log(user);
-    } catch (error) { 
+    } catch (error) {
       console.log(error);
     }
   }
@@ -34,19 +36,20 @@ export default function SignUpPage() {
   };
 
   const newItem = {
-    "fullName": fullName,
-    "userName": userName,
-    "password": password
+    fullName: fullName,
+    userName: userName,
+    password: password,
   };
 
-  const handleSignUp=()=>{
+  const handleSignUp = () => {
     if (user) {
-      addUser(newItem,user.uid)
-      console.log("addUser",user.uid);
-      setDialogOpen(true)
+      addUser(newItem, user.uid);
+      console.log("addUser", user.uid);
+      setDialogOpen(true);
+    } else {
+      console.log("fail");
     }
-    else{      console.log("fail");}
-  }
+  };
   const handleCloseDialog = () => {
     setDialogOpen(false);
   };
@@ -57,17 +60,18 @@ export default function SignUpPage() {
       style={{ backgroundColor: "#FFFFFF" }}
     >
       <Link href="./LoginPage">
-      <button
-        className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
-      >
-        ← Back To Main Page
-      </button>
+        <button
+          onClick={() => router.back()}
+          className="absolute left-4 top-4 bg-[#DC8686] text-white p-2 rounded-md hover:bg-[#bf7676]"
+        >
+          ← Back To Main Page
+        </button>
       </Link>
       <div className="w-full max-w-sm">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Create New Account
         </h2>
-        <form  onSubmit={handleSignUp} className="space-y-6">
+        <form onSubmit={handleSignUp} className="space-y-6">
           <div>
             <label
               htmlFor="full-name"
@@ -111,24 +115,24 @@ export default function SignUpPage() {
               value={password}
               onChange={handleSetPassword}
               id="password"
-              type="password"  
-               placeholder="Enter Your Password Here"
+              type="password"
+              placeholder="Enter Your Password Here"
               className="w-full p-2 border border-[#DC8686] rounded-md text-gray-600"
             />
           </div>
-      
-          
         </form>
         <button
-            onClick={handleSignUp}
-            className="mt-2  w-full py-2 px-4 bg-[#DC8686] text-white rounded-md font-bold hover:bg-[#bf7676]"
-          >
-            Sign Up
-          </button>
-       
+          onClick={handleSignUp}
+          className="mt-2  w-full py-2 px-4 bg-[#DC8686] text-white rounded-md font-bold hover:bg-[#bf7676]"
+        >
+          Sign Up
+        </button>
       </div>
-      <AlertDialog isOpen={isDialogOpen} onClose={handleCloseDialog} content={"Congratulation! You signed up successfully!"}/>
-
+      <AlertDialog
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+        content={"Congratulation! You signed up successfully!"}
+      />
     </div>
   );
 }

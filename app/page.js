@@ -1,5 +1,5 @@
 import { AuthContextProvider } from "./_utils/auth-context";
-import LandingPage from "./landing/page";
+import LandingPage from "./LandingPage/page";
 
 export default function Page() {
   return (
